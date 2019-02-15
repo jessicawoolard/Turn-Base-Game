@@ -1,0 +1,24 @@
+.ring{
+    background-image: url("../media/ring2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#yourHealth, #compHealth {
+	position: relative;
+	height: 30px;
+	width: 250px;
+	border: white 3px solid;
+	border-radius: 3px;
+	margin-right: 20px;
+	display: inline-block;
+}
+
+#yourHealthBar, #compHealthBar {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: lightgreen;
+}
