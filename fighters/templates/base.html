@@ -3,12 +3,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sitcom Spars</title>
+    <title>{% block title %} {% endblock title %}</title>
     <link rel="stylesheet" type="text/css" href="../static/fighters/css/styles.css">
 </head>
 <body>
 
+{% block content %}
 
+{% endblock  content%}
 <script type="text/javascript" src="../static/fighters/js/main.js"></script>
 </body>
 </html>
