@@ -1,9 +1,70 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock title %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../static/fighters/css/styles.css">
+</head>
+<body>
 
-{% block title %} Sparring Sitcoms {% endblock title %}
+
+<div class="app"></div>
 
 
-{% block content %}
-<h1>Hello</h1>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.js"></script>
+<script id="welcome-screen" type="text/x-handlebars-template">
+    <div class="container">
+        <h1>Hello Gamers!</h1>
 
-{% endblock content %}
+        <a id="next-button" class="btn btn-primary" href="#">Next Screen</a>
+    </div>
+</script>
+
+<script id="next-screen" type="text/x-handlebars-template">
+    <div class="container ring">
+
+        <div class="row">
+            <div class="col" id="yourHealth"><div id="yourHealthBar"></div></div>
+            <div class="col" id="compHealth"><div id="compHealthBar"></div></div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 buttons">
+                <button class="row button" id="attack-button">Attack</button>
+                <button class="row button" id="attack2-button">Attack</button>
+                <button class="row button" id="attack3-button">Attack</button>
+            </div>
+        </div>
+        <div>
+            <div class="hero">
+                <div class="wrapper">
+                    <div class="head"><img src="../static/fighters/media/zack.jpg" alt=""></div>
+                    <div class="torso"></div>
+                    <div class="leftarm"></div>
+                    <div class="rightarm"></div>
+                    <div class="leftleg"></div>
+                    <div class="leftfoot"></div>
+                    <div class="rightleg"></div>
+                    <div class="rightfoot"></div>
+                </div>
+            </div>
+            <div class="villain">
+                <div class="wrapper">
+                    <div class="head"></div>
+                    <div class="torso"></div>
+                    <div class="leftarm"></div>
+                    <div class="rightarm"></div>
+                    <div class="leftleg"></div>
+                    <div class="leftfoot"></div>
+                    <div class="rightleg"></div>
+                    <div class="rightfoot"></div>
+                </div>
+            </div>
+        </div>
+        <a id="back-button" class="btn btn-primary" href="#">Back a Screen</a>
+    </div>
+</script>
+<script type="text/javascript" src="../static/fighters/js/main.js"></script>
+</body>
+</html>

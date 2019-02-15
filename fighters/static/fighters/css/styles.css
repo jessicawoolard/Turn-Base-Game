@@ -2,6 +2,13 @@
     box-sizing: border-box;
 }
 
+img {
+    width: 50px;
+    height: 60px;
+    border-radius: 50%;
+
+}
+
 .ring{
     background-image: url("../media/ring2.jpg");
     background-size: cover;
