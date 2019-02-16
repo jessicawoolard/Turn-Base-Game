@@ -124,7 +124,10 @@
         //Attacking
         $('#attack-button').on('click', function () {
 
-        })
+        });
+
+        var rand = villians[Math.floor(Math.random()*villians.length)];
+        console.log(rand)
 
 
     });
