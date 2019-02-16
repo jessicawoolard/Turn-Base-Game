@@ -15,8 +15,9 @@ class Hero extends Character{
     }
 }
 
-class Villain extends Character{
-    constructor(context){
+class Villain extends Character {
+    constructor(context) {
         super(context);
         this.villainPower = context.villainPower
     }
+}
