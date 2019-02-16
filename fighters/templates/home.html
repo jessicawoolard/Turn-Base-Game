@@ -1,8 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %} {% endblock title %}</title>
+    <title>Sitcom Deathmatch</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../static/fighters/css/styles.css">
 </head>
@@ -14,11 +15,20 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.js"></script>
-<script src="../static/fighters/js/models.js"></script>
+
 <script id="welcome-screen" type="text/x-handlebars-template">
-    <div class="container">
-        <h1>Sitcom Sparring</h1>
-        <a id="next-button" class="btn btn-primary" href="#">Fight!</a>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+          <h1 class="display-4">Heroes</h1>
+          <h1 class="display-4">vs.</h1>
+          <h1 class="display-4">Villains</h1>
+          <p class="lead text-center">Take control of your favorite sitcom stars and help them defeat their arch nemesis.</p>
+    </div>
+        <ul>
+            <li></li>
+        </ul>
+          <a id="next-button" class="btn btn-primary" href="#">Fight!</a>
+      </div>
     </div>
 </script>
 
@@ -31,7 +41,7 @@
         </div>
         <div class="row">
             <div class="col-md-2 buttons">
-                <p>{{ name }}</p>
+                <p></p>
                 <button class="row button" id="attack-button">Attack</button>
                 <button class="row button" id="attack2-button">Attack</button>
                 <button class="row button" id="attack3-button">Attack</button>
@@ -40,7 +50,7 @@
         <div>
             <div class="hero">
                 <div class="wrapper">
-                    <div class="head"><img src="../static/fighters/media/zack.jpg" alt=""></div>
+                    <div class="head"><img src="../static/fighters/media/zack.png" alt=""></div>
                     <div class="torso"></div>
                     <div class="leftarm"></div>
                     <div class="rightarm"></div>
@@ -66,6 +76,11 @@
         <a id="back-button" class="btn btn-primary" href="#">Back a Screen</a>
     </div>
 </script>
+
+<script id="gameover-screen" type="text/x-handlebars-template">
+
+</script>
+<script type="text/javascript" src="../static/fighters/js/models.js"></script>
 <script type="text/javascript" src="../static/fighters/js/main.js"></script>
 </body>
 </html>
