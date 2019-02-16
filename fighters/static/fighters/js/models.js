@@ -20,4 +20,3 @@ class Villain extends Character{
         super(context);
         this.villainPower = context.villainPower
     }
-}
