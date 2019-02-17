@@ -17,7 +17,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.js"></script>
 
 <script id="welcome-screen" type="text/x-handlebars-template">
-    <audio src="../static/fighters/media/mainsong.mp3" autoplay></audio>
+{#    <audio src="../static/fighters/media/mainsong.mp3" autoplay></audio>#}
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
           <h1 class="display-4">Heroes</h1>
@@ -39,6 +39,7 @@
 
 <script id="next-screen" type="text/x-handlebars-template">
     <audio src="../static/fighters/media/main.mp3" autoplay></audio>
+{#    <audio src="../static/fighters/media/punch.mp3" preload="auto"></audio>#}
     <div class="container ring">
 
         <div class="row">
@@ -47,7 +48,7 @@
         </div>
         <div class="row">
             <div class="col-md-2 buttons">
-                <p></p>
+
                 <button class="row button" id="attack-button">Attack</button>
                 <button class="row button" id="attack2-button">Attack</button>
                 <button class="row button" id="attack3-button">Attack</button>
@@ -58,7 +59,7 @@
                 <div class="wrapper">
 {#                    I know this image isn't setup right, but it's going to be similar once we pass in the var name to the curly brackets#}
 {#                    they may go inside the apostrophes though.#}
-                    <div class="head"><!--<img src="{% static 'fighters/media/' {{  }} %}.png" alt="">--></div>
+                    <div class="head"><!--<img class="character-picture" src="{% static 'fighters/media/' {{  }} %}.png" alt="">--></div>
                     <div class="torso"></div>
                     <div class="leftarm"></div>
                     <div class="rightarm"></div>
@@ -86,7 +87,9 @@
 </script>
 
 <script id="gameover-screen" type="text/x-handlebars-template">
-
+    <div class="game over">
+        <div><img src="../static/fighters/media/game_over.gif" alt="" width="1275" height="620"></div>
+    </div>
 </script>
 <script type="text/javascript" src="../static/fighters/js/models.js"></script>
 <script type="text/javascript" src="../static/fighters/js/main.js"></script>

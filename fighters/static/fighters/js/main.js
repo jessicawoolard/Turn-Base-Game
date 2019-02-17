@@ -30,6 +30,10 @@
 
         var activeFighter;
 
+        var gameOverScreen = document.getElementById("gameover-screen").innerHTML;
+        var gameOverScreenTemplate = Handlebars.compile(gameOverScreen);
+
+
         function displayWelcomeScreen() {
             $('.app').html(welcomeScreenTemplate());
 
@@ -56,14 +60,14 @@
 
         function displayNextScreen() {
             var context = {
-                'name': 'Dan'
+
             };
 
             $('.app').html(nextScreenTemplate(context));
 
             $('#back-button').on('click', function (e) {
                 e.preventDefault();
-                displayWelcomeScreen();
+                displayGameOverScreen();
             });
             $('#attack-button').click(function () {
                 var hitOutcome = [];
@@ -73,108 +77,123 @@
                     var result = Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
                     hitOutcome.push(result)
                 }(15, 20));
-                console.log(hitOutcome)
-                var snd = new Audio('../media/punch.mp3');
-                snd.play();
-                snd.currentTime=0;
+                var strongHitOutcome = [];
+                (function strongHit(min, max) {
+                    min = Math.ceil(min);
+                    max = Math.floor(max);
+                    var result2 = Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+                    strongHitOutcome.push(result2)
+                }(25, 40));
+                var totalHit = '';
+                var hit = Math.random();
+                if(hit<0.8){
+                    totalHit += hitOutcome.toString()
+                }else{
+                    totalHit += strongHitOutcome.toString()
+                }
+                console.log(totalHit);
+                        var villainHitOutcome = [];
+                        (function swiftHit(min, max) {
+                            min = Math.ceil(min);
+                            max = Math.floor(max);
+                            var result3 = Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+                            villainHitOutcome.push(result3)
+                        }(15, 20));
+
+                        var villainStrongHitOutcome = [];
+                        (function strongHit(min, max) {
+                            min = Math.ceil(min);
+                            max = Math.floor(max);
+                            var result4 = Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+                            villainStrongHitOutcome.push(result4)
+                        }(25, 40));
+                        var totalVillainHit = '';
+                        var villainHit = Math.random();
+                        if (villainHit < 0.8) {
+                            totalVillainHit += villainHitOutcome.toString()
+                        } else {
+                            totalVillainHit += villainStrongHitOutcome.toString()
+                        }
+                        //i'm not doing something right with the setTimeout function to create the delay
+                        //between hits. kind of a bummer. i'm going to leave it alone for now, since it's purely aesthetics.
+                        setTimeout(function () {
+                            console.log(totalVillainHit);
+                        }(2500));
+
+                // var snd = new Audio('punch.mp3');
+                // snd.play();
+                // snd.currentTime=0;
             });
+        }
+
+        function displayGameOverScreen(){
+            var context = {};
+            $('.app').html(gameOverScreenTemplate());
+
         }
 
         // Run the program for the first time!
         displayWelcomeScreen();
 
         // Characters
-
-        var hitOutcome = [];
-        (function swiftHit(min, max) {
-            min = Math.ceil(min);
-            max = Math.floor(max);
-            var result = Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-            hitOutcome.push(result)
-        }(15, 20));
-
-        var villainHitOutcome = [];
-        (function swiftHit(min, max) {
-            min = Math.ceil(min);
-            max = Math.floor(max);
-            var result3 = Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-            villainHitOutcome.push(result3)
-        }(15, 20));
-
-        var villainStrongHitOutcome = [];
-        (function strongHit(min, max) {
-            min = Math.ceil(min);
-            max = Math.floor(max);
-            var result4 = Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-            villainStrongHitOutcome.push(result4)
-        }(25, 40));
-
-        var strongHitOutcome = [];
-        (function strongHit(min, max) {
-            min = Math.ceil(min);
-            max = Math.floor(max);
-            return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-        }(25, 40));
-
-
         var fiona = new Hero({
             playerName: "Fiona",
-            attack1: hitOutcome.toString(),
-            attack2: strongHitOutcome.toString(),
+            attack1: 'flavor text',
+            attack2: 'flavor text',
             specialPower: 'snatch and grab'
         });
         var frank = new Villain({
             playerName: "Frank",
-            attack1: villainHitOutcome.toString(),
-            attack2: villainStrongHitOutcome.toString(),
+            attack1: 'flavor text',
+            attack2: 'flavor text',
             villainPower: 'drunk joke here'
         });
         var michael = new Hero({
             playerName: "Michael",
-            attack1: hitOutcome.toString(),
-            attack2: strongHitOutcome.toString(),
+            attack1: 'flavor text',
+            attack2: 'flavor text',
             specialPower: 'lonely punch'
         });
         var prisonMike = new Villain({
             playerName: "Prison Mike",
-            attack1: villainHitOutcome.toString(),
-            attack2: villainStrongHitOutcome.toString(),
+            attack1: 'flavor text',
+            attack2: 'flavor text',
             villainPower: 'drunk joke here'
         });
         var will = new Hero({
             playerName: "Will",
-            attack1: hitOutcome.toString(),
-            attack2: strongHitOutcome.toString(),
+            attack1: 'flavor text',
+            attack2: 'flavor text',
             specialPower: 'snatch and grab'
         });
         var carlton = new Villain({
             playerName: "Carlton",
-            attack1: villainHitOutcome.toString(),
-            attack2: villainStrongHitOutcome.toString(),
+            attack1: 'flavor text',
+            attack2: 'flavor text',
             villainPower: 'drunk joke here'
         });
         var zack = new Hero({
             playerName: "Zack Morris",
-            attack1: hitOutcome.toString(),
-            attack2: strongHitOutcome.toString(),
+            attack1:'flavor text',
+            attack2: 'flavor text',
             specialPower: 'snatch and grab'
         });
         var belding = new Villain({
             playerName: "Mr. Belding",
-            attack1: villainHitOutcome.toString(),
-            attack2: villainStrongHitOutcome.toString(),
+            attack1: 'flavor text',
+            attack2: 'flavor text',
             villainPower: 'drunk joke here'
         });
         var eric = new Hero({
             playerName: "Eric",
-            attack1: hitOutcome.toString(),
-            attack2: strongHitOutcome.toString(),
+            attack1: 'flavor text',
+            attack2: 'flavor text',
             specialPower: 'snatch and grab'
         });
         var red = new Villain({
             playerName: "Red",
-            attack1: villainHitOutcome.toString(),
-            attack2: villainStrongHitOutcome.toString(),
+            attack1: 'flavor text',
+            attack2: 'flavor text',
             villainPower: 'drunk joke here'
         });
 

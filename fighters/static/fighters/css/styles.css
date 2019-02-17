@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-img {
+.character-picture {
     width: 55px;
     height: 60px;
     /*border-radius: 50%;*/
