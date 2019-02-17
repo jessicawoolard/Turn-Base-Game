@@ -33,8 +33,21 @@
             $('.app').html(welcomeScreenTemplate());
 
             // Register event handler for the next button
+            var activeFighter;
+
             $('#next-button').on('click', function (e) {
                 e.preventDefault();
+                var selectedHero = $('#hero_menu').val(':selected').text();
+                var i;
+                for (i = 0; i < heroes.length; i++) {
+                    var currentHero = heroes[i];
+                    if (currentHero.playerName === selectedHero) {
+                        selectedHero = activeFighter;
+                        break
+                    }
+                }
+                console.log(selectedHero);
+
                 displayNextScreen();
             });
         }
@@ -49,7 +62,17 @@
             $('#back-button').on('click', function (e) {
                 e.preventDefault();
                 displayWelcomeScreen();
-            })
+            });
+            $('#attack-button').click(function () {
+                var hitOutcome = [];
+                (function swiftHit(min, max) {
+                    min = Math.ceil(min);
+                    max = Math.floor(max);
+                    var result = Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+                    hitOutcome.push(result)
+                }(15, 20));
+                console.log(hitOutcome)
+            });
         }
 
         // Run the program for the first time!
@@ -57,50 +80,110 @@
 
         // Characters
 
-        var fiona = new Hero({playerName: "Fiona", attack1: 'hit1', attack2: 'hit2', specialPower: 'snatch and grab'});
+        var hitOutcome = [];
+        (function swiftHit(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            var result = Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+            hitOutcome.push(result)
+        }(15, 20));
+
+        var villainHitOutcome = [];
+        (function swiftHit(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            var result3 = Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+            villainHitOutcome.push(result3)
+        }(15, 20));
+
+        var villainStrongHitOutcome = [];
+        (function strongHit(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            var result4 = Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+            villainStrongHitOutcome.push(result4)
+        }(25, 40));
+
+        var strongHitOutcome = [];
+        (function strongHit(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            var result2 = Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+            strongHitOutcome.push(result2)
+        }(25, 40));
+
+
+        var fiona = new Hero({
+            playerName: "Fiona",
+            attack1: hitOutcome.toString(),
+            attack2: strongHitOutcome.toString(),
+            specialPower: 'snatch and grab'
+        });
         console.log(fiona);
         var frank = new Villain({
             playerName: "Frank",
-            attack1: 'hit1',
-            attack2: 'hit2',
+            attack1: villainHitOutcome.toString(),
+            attack2: villainStrongHitOutcome.toString(),
             villainPower: 'drunk joke here'
         });
         console.log(frank);
-        var michael = new Hero({playerName: "Michael", attack1: 'hit1', attack2: 'hit2', specialPower: 'lonely punch'});
+
+        var michael = new Hero({
+            playerName: "Michael",
+            attack1: hitOutcome.toString(),
+            attack2: strongHitOutcome.toString(),
+            specialPower: 'lonely punch'
+        });
         console.log(michael);
+
         var prisonMike = new Villain({
             playerName: "Prison Mike",
-            attack1: 'hit1',
-            attack2: 'hit2',
+            attack1: villainHitOutcome.toString(),
+            attack2: villainStrongHitOutcome.toString(),
             villainPower: 'drunk joke here'
         });
         console.log(prisonMike);
-        var will = new Hero({playerName: "Will", attack1: 'hit1', attack2: 'hit2', specialPower: 'snatch and grab'});
+        var will = new Hero({
+            playerName: "Will",
+            attack1: hitOutcome.toString(),
+            attack2: strongHitOutcome.toString(),
+            specialPower: 'snatch and grab'
+        });
         console.log(will);
         var carlton = new Villain({
             playerName: "Carlton",
-            attack1: 'hit1',
-            attack2: 'hit2',
+            attack1: villainHitOutcome.toString(),
+            attack2: villainStrongHitOutcome.toString(),
             villainPower: 'drunk joke here'
         });
         console.log(carlton);
         var zack = new Hero({
             playerName: "Zack Morris",
-            attack1: 'hit1',
-            attack2: 'hit2',
+            attack1: hitOutcome.toString(),
+            attack2: strongHitOutcome.toString(),
             specialPower: 'snatch and grab'
         });
         console.log(zack);
         var belding = new Villain({
             playerName: "Mr. Belding",
-            attack1: 'hit1',
-            attack2: 'hit2',
+            attack1: villainHitOutcome.toString(),
+            attack2: villainStrongHitOutcome.toString(),
             villainPower: 'drunk joke here'
         });
         console.log(belding);
-        var eric = new Hero({playerName: "Eric", attack1: 'hit1', attack2: 'hit2', specialPower: 'snatch and grab'});
+        var eric = new Hero({
+            playerName: "Eric",
+            attack1: hitOutcome.toString(),
+            attack2: strongHitOutcome.toString(),
+            specialPower: 'snatch and grab'
+        });
         console.log(eric);
-        var red = new Villain({playerName: "Red", attack1: 'hit1', attack2: 'hit2', villainPower: 'drunk joke here'});
+        var red = new Villain({
+            playerName: "Red",
+            attack1: villainHitOutcome.toString(),
+            attack2: villainStrongHitOutcome.toString(),
+            villainPower: 'drunk joke here'
+        });
         console.log(red);
 
         var heroes = Array(fiona, michael, will, zack, eric);
@@ -120,13 +203,16 @@
 
 
         //Attacking
+
         $('#attack-button').on('click', function () {
 
         });
-        $("#rand").on('click', function(){
+
+
+        $("#rand").on('click', function () {
             console.log(rand)
         });
-        var rand = villains[Math.floor(Math.random()*villains.length)];
+        var rand = villains[Math.floor(Math.random() * villains.length)];
 
 
     });
