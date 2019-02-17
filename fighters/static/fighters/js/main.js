@@ -72,6 +72,9 @@
                     hitOutcome.push(result)
                 }(15, 20));
                 console.log(hitOutcome)
+                var snd = new Audio('../media/punch.mp3');
+                snd.play();
+                snd.currentTime=0;
             });
         }
 
