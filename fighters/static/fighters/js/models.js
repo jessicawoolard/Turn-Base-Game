@@ -6,6 +6,10 @@ class Character{
        this.attack1 = context.attack1;
        this.attack2 = context.attack2;
     }
+
+    powerfulAttack() {
+        console.log("tesT");
+    }
 }
 
 class Hero extends Character{
@@ -13,6 +17,7 @@ class Hero extends Character{
         super(context);
         this.specialPower = context.specialPower
     }
+
 }
 
 class Villain extends Character {

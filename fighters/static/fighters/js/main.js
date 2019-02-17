@@ -28,25 +28,27 @@
         var welcomeScreen = document.getElementById("welcome-screen").innerHTML;
         var welcomeScreenTemplate = Handlebars.compile(welcomeScreen);
 
+        var activeFighter;
 
         function displayWelcomeScreen() {
             $('.app').html(welcomeScreenTemplate());
 
             // Register event handler for the next button
-            var activeFighter;
+
 
             $('#next-button').on('click', function (e) {
                 e.preventDefault();
-                var selectedHero = $('#hero_menu').val(':selected').text();
+                var selectedHero = $('#hero_menu option:selected').val();
                 var i;
                 for (i = 0; i < heroes.length; i++) {
                     var currentHero = heroes[i];
                     if (currentHero.playerName === selectedHero) {
-                        selectedHero = activeFighter;
+                        console.log("match!");
+                        activeFighter = currentHero;
                         break
                     }
                 }
-                console.log(selectedHero);
+                console.log(activeFighter);
 
                 displayNextScreen();
             });
@@ -111,8 +113,7 @@
         (function strongHit(min, max) {
             min = Math.ceil(min);
             max = Math.floor(max);
-            var result2 = Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-            strongHitOutcome.push(result2)
+            return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
         }(25, 40));
 
 
@@ -122,72 +123,60 @@
             attack2: strongHitOutcome.toString(),
             specialPower: 'snatch and grab'
         });
-        console.log(fiona);
         var frank = new Villain({
             playerName: "Frank",
             attack1: villainHitOutcome.toString(),
             attack2: villainStrongHitOutcome.toString(),
             villainPower: 'drunk joke here'
         });
-        console.log(frank);
-
         var michael = new Hero({
             playerName: "Michael",
             attack1: hitOutcome.toString(),
             attack2: strongHitOutcome.toString(),
             specialPower: 'lonely punch'
         });
-        console.log(michael);
-
         var prisonMike = new Villain({
             playerName: "Prison Mike",
             attack1: villainHitOutcome.toString(),
             attack2: villainStrongHitOutcome.toString(),
             villainPower: 'drunk joke here'
         });
-        console.log(prisonMike);
         var will = new Hero({
             playerName: "Will",
             attack1: hitOutcome.toString(),
             attack2: strongHitOutcome.toString(),
             specialPower: 'snatch and grab'
         });
-        console.log(will);
         var carlton = new Villain({
             playerName: "Carlton",
             attack1: villainHitOutcome.toString(),
             attack2: villainStrongHitOutcome.toString(),
             villainPower: 'drunk joke here'
         });
-        console.log(carlton);
         var zack = new Hero({
             playerName: "Zack Morris",
             attack1: hitOutcome.toString(),
             attack2: strongHitOutcome.toString(),
             specialPower: 'snatch and grab'
         });
-        console.log(zack);
         var belding = new Villain({
             playerName: "Mr. Belding",
             attack1: villainHitOutcome.toString(),
             attack2: villainStrongHitOutcome.toString(),
             villainPower: 'drunk joke here'
         });
-        console.log(belding);
         var eric = new Hero({
             playerName: "Eric",
             attack1: hitOutcome.toString(),
             attack2: strongHitOutcome.toString(),
             specialPower: 'snatch and grab'
         });
-        console.log(eric);
         var red = new Villain({
             playerName: "Red",
             attack1: villainHitOutcome.toString(),
             attack2: villainStrongHitOutcome.toString(),
             villainPower: 'drunk joke here'
         });
-        console.log(red);
 
         var heroes = Array(fiona, michael, will, zack, eric);
         var villains = Array(frank, prisonMike, carlton, belding, red);
@@ -208,7 +197,11 @@
         //Attacking
 
         $('#attack-button').on('click', function () {
+            activeFighter.powerfulAttack();
+        });
 
+        $('#attack-button2').on('click', function () {
+            console.log(activeFighter.attack2);
         });
 
 
