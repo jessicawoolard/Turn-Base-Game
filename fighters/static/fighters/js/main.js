@@ -104,19 +104,17 @@
         console.log(red);
 
         var heroes = Array(fiona, michael, will, zack, eric);
-        var villians = Array(frank, prisonMike, carlton, belding, red);
+        var villains = Array(frank, prisonMike, carlton, belding, red);
 
         // console.log(carlton);
         heroes.forEach(function (hero) {
             $("#hero_menu").append('<option value="' + hero.playerName + '">' + hero.playerName + '</option>');
         });
 
-        villians.forEach(function (villians) {
-            $("#villian_menu").append('<option value="' + villians.playerName + '">' + villians.playerName + '</option>');
+        villains.forEach(function (villains) {
+            $("#villain_menu").append('<option value="' + villains.playerName + '">' + villains.playerName + '</option>');
         });
 
-
-        $("#menu_contain").append("<button>" + carlton.playerName + "</button>");
 
         // $.ajax('game/', {success: displayNextScreen});
 
@@ -126,7 +124,7 @@
 
         });
 
-        var rand = villians[Math.floor(Math.random()*villians.length)];
+        var rand = villains[Math.floor(Math.random()*villains.length)];
         console.log(rand)
 
 
