@@ -18,30 +18,46 @@
         });
 
         // Navigation
-
+        // The first three sets of variables are grabbing an element id from the html
+        // Each id is in a script tag that has what we want to be a 'page'
+        // then, we are making an html template with handlebars' compile method.
+        // refer to dan's 7.1 demo to see a better way to organize this with classes
+        // because it currently is more like Do Repeat Yourself
         var nextScreen = document.getElementById("next-screen").innerHTML;
         var nextScreenTemplate = Handlebars.compile(nextScreen);
 
         var welcomeScreen = document.getElementById("welcome-screen").innerHTML;
         var welcomeScreenTemplate = Handlebars.compile(welcomeScreen);
 
-        var activeHero;
-        var activeVillain;
-
-        var heroHealth = 100;
-        var villainHealth = 100;
-
         var gameOverScreen = document.getElementById("gameover-screen").innerHTML;
         var gameOverScreenTemplate = Handlebars.compile(gameOverScreen);
 
+        //this is just the variables that represent the object that is the active hero and the active villain.
+        // each of these variables is filled from below (we'll get to that). Just know that at this point, each of these
+        // variables is = to one of the heroes, and their array or one of the villains and their array.
+        // for example, activeHero could be [playerName:'Michael Scott', image:'whatever his picture is called', specialPower:'flavortexthere']
+        var activeHero;
+        var activeVillain;
+
+        //This is just setting their starting health to 100 each.
+        var heroHealth = 100;
+        var villainHealth = 100;
 
 
 
+        // This function is what it means to display the welcome screen, or the home screen
         function displayWelcomeScreen() {
+            // here, we use jquery to say that in the app id (from the html), we want to add the html that is in
+            // welcomeScreenTemplate. You can see above that the welcomeScreenTemplate is compiled into html thanks to handlebars
             $('.app').html(welcomeScreenTemplate());
-            // Register event handler for the next button
+            // This function is going to update the active hero based on the selection you pick in the dropdown menu.
             function updateSelectedHero(){
+                // This is saying let the selectedHero variable be equal to the selected option
+                // link to info about jquery selected (https://api.jquery.com/selected-selector/)
                 let selectedHero = $('#hero_menu option:selected').val();
+                // this is a for loop that is basically saying that for each hero in the hero array (bottom of page),
+                // get out the playerName. if the playerName is equal to the selected hero from above,
+                // make that the activeHero
                 for (var i = 0; i < heroes.length; i++) {
                     let currentHero = heroes[i];
                     if (currentHero.playerName === selectedHero) {
@@ -50,7 +66,8 @@
                     }
                 }
             }
-
+            // this is just updating the hero_avatar with css, and the css is adding a background, which is the
+            // url path + the activeHero image + a couple of quotes and apostrophes to close everything up.
             function  updateHeroAvatar() {
                 $('#hero_avatar').css({
                     'background': "url('../../../static/fighters/media/" + activeHero.image + "')"
@@ -62,12 +79,19 @@
                     'background': "url('../../../static/fighters/media/" + activeVillain.image + "')"
                 });
             }
+            // this just makes the random villain selected as soon as the first page loads by using the
+            // built-in Math object to get a random villain from the villain array.
             function updateSelectedVillain() {
                 activeVillain = villains[Math.floor(Math.random() * villains.length)];
             }
-
+            //this is connected to the fight button. when you click it, it has a function event that will
+            //prevent the default action of the click function, and then it has a setTimeout on it, which lets you
+            //set a timer so the things in that function don't happen until the timeout time has elapsed.
+            // this time it's 2500 milliseconds, or 2.5 seconds
             $('#next-button').on('click', function (e) {
                 e.preventDefault();
+                // so it will take 2 1/2 seconds for the displayNextScreen to happen, and for the updated stuff to
+                // carry over to that template.
                 setTimeout(function () {
                 updateSelectedHero();
                 updateSelectedVillain();
@@ -77,16 +101,20 @@
                 },2500);
             });
         }
-
+        // This is setting up a function that will make randomAttack a random number between two variables
         function randomAttack(min, max) {
             min = Math.floor(min);
             max = Math.ceil(max);
             return Math.floor(Math.random() * (max - min)) + min;
         }
 
+        // this is basically the same idea as the function displayWelcomeScreen
         function displayNextScreen() {
 
             $('.app').html(nextScreenTemplate());
+            // this is going and finding the disappear id (tied to parent of fight.gif), and saying bring in saint,
+            // the id that's tied to the actual gif, after 6 seconds with the show method, and then another timeout
+            //that will hide it after half a second.
             $('#disappear').ready(function () {
                 setTimeout(function () {
                     $('#saint').show(6000, function () {
@@ -97,7 +125,7 @@
                 });
             });
 
-
+            // this is what gets the player name's to show under the health bars
             $('#yourName').append(activeHero.playerName);
             $('#theirName').append(activeVillain.playerName);
 
