@@ -19,9 +19,6 @@
 
         // Navigation
 
-        // $('.button').on('click', function (e) {
-        //     console.log('works')
-        // });
         var nextScreen = document.getElementById("next-screen").innerHTML;
         var nextScreenTemplate = Handlebars.compile(nextScreen);
 
@@ -59,13 +56,12 @@
             }
 
             function  updateVillainAvatar() {
-                $('#villian_avatar').css({
+                $('#villain_avatar').css({
                     'background': "url('../../../static/fighters/media/" + activeVillain.image + "')"
                 });
             }
             function updateSelectedVillain() {
-                var randomVillain = villains[Math.floor(Math.random() * villains.length)];
-                activeVillain = randomVillain
+                activeVillain = villains[Math.floor(Math.random() * villains.length)];
             }
 
             $('#next-button').on('click', function (e) {
@@ -91,7 +87,7 @@
 
             $('#back-button').on('click', function (e) {
                 e.preventDefault();
-                displayGameOverScreen();
+                displayWelcomeScreen();
             });
 
             function heroAttack() {
@@ -206,7 +202,6 @@
         var heroes = Array(fiona, michael, will, zack, eric);
         var villains = Array(frank, prisonMike, carlton, belding, red);
 
-        // console.log(carlton);
         heroes.forEach(function (hero) {
             $("#hero_menu").append('<option value="' + hero.playerName + '">' + hero.playerName + '</option>');
         });
@@ -214,13 +209,6 @@
         villains.forEach(function (villains) {
             $("#villain_menu").append('<option value="' + villains.playerName + '">' + villains.playerName + '</option>');
         });
-
-
-        // $.ajax('game/', {success: displayNextScreen});
-
-
-        //Attacking
-
 
     });
 }(jQuery));

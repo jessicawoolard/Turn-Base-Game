@@ -17,7 +17,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.js"></script>
 
 <script id="welcome-screen" type="text/x-handlebars-template">
-{#    <audio src="../static/fighters/media/mainsong.mp3" autoplay></audio>#}
+    <audio src="../static/fighters/media/mainsong.mp3" autoplay></audio>
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
           <h1 class="display-4">Heroes</h1>
@@ -43,6 +43,9 @@
     <div class="container ring">
 
         <div class="row">
+            <div id="hero-name">
+            <p id="yourName"></p>
+            </div>
             <div class="col" id="yourHealth"><div id="yourHealthBar"></div></div>
             <div class="col" id="compHealth"><div id="compHealthBar"></div></div>
         </div>
