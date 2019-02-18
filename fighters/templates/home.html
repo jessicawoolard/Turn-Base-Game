@@ -18,23 +18,19 @@
 
 <script id="welcome-screen" type="text/x-handlebars-template">
     <audio src="../static/fighters/media/mainsong.mp3" autoplay></audio>
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-          <h1 class="display-4">Heroes</h1>
-          <h1 class="display-4">vs.</h1>
-          <h1 class="display-4">Villains</h1>
-          <p class="lead text-center">Take control of your favorite sitcom stars and help them defeat their arch nemesis.</p>
+    <div class="logo">
+    <img class="logo-width" src="../static/fighters/media/sitcom-logo.png" alt="sitcom logo">
     </div>
-       <select class="" id="hero_menu">
+    <div class="container-fluid">
+        <div class="margin-auto">
+        <a id="next-button" class="btn btn-primary" href="#">Fight!</a>
+        <select class="row margin-auto" id="hero_menu">
             <option></option>
         </select>
-        <select class="" id="villain_menu">
-            <option></option>
-        </select>
-        <button type="button" id="rand">random villain</button>
-          <a id="next-button" class="btn btn-primary" href="#">Fight!</a>
-      </div>
+        </div>
+
     </div>
+
 </script>
 
 <script id="next-screen" type="text/x-handlebars-template">
@@ -51,10 +47,7 @@
         </div>
         <div class="row">
             <div class="col-md-2 buttons">
-
                 <button class="row button" id="attack-button">Attack</button>
-                <button class="row button" id="attack2-button">Attack</button>
-                <button class="row button" id="attack3-button">Attack</button>
             </div>
         </div>
         <div>
