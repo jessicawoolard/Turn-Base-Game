@@ -29,14 +29,15 @@
         var activeVillain;
 
         var heroHealth = 100;
-        var villianHealth = 100;
+        var villainHealth = 100;
 
         var gameOverScreen = document.getElementById("gameover-screen").innerHTML;
         var gameOverScreenTemplate = Handlebars.compile(gameOverScreen);
 
+
+
         function displayWelcomeScreen() {
             $('.app').html(welcomeScreenTemplate());
-
             // Register event handler for the next button
             function updateSelectedHero(){
                 let selectedHero = $('#hero_menu option:selected').val();
@@ -72,7 +73,6 @@
                 updateHeroAvatar();
                 updateVillainAvatar();
             });
-
         }
 
         function randomAttack(min, max) {
@@ -85,10 +85,13 @@
 
             $('.app').html(nextScreenTemplate());
 
+            $('yourName').append(activeHero.playerName);
+
             $('#back-button').on('click', function (e) {
                 e.preventDefault();
-                displayWelcomeScreen();
+                displayGameOverScreen();
             });
+            console.log(activeVillain)
 
             function heroAttack() {
                 var heroHit = 0;
@@ -100,6 +103,7 @@
                     heroHit = randomAttack(25, 40);
                 }
 
+
                 villianHealth -= heroHit;
 
                 $("#compHealthBar").animate({
@@ -109,18 +113,25 @@
                     displayGameOverScreen(activeHero);
                 }
                 });
+
+                villainHealth -= heroHit;
+                $("#compHealthBar").animate({
+                    width: villainHealth + "%",
+                }, 1000);
+
             }
 
-            function villianAttack() {
+            function villainAttack() {
 
-                var villianHit = 0;
+                var villainHit = 0;
                 if (Math.random() < 0.8) {
-                    villianHit = randomAttack(15, 20);
+                    villainHit = randomAttack(15, 20);
                 } else {
-                    villianHit = randomAttack(25, 40);
+                    villainHit = randomAttack(25, 40);
                 }
 
-                heroHealth -= villianHit;
+
+                heroHealth -= villainHit;
 
                 $("#yourHealthBar").animate({
                     width: heroHealth + "%",
@@ -136,7 +147,7 @@
                 heroAttack();
 
                 setTimeout(function () {
-                    villianAttack();
+                    villainAttack();
                 },2500);
 
                 let soundEffect = new Audio('../../../static/fighters/media/punch.mp3');
@@ -144,11 +155,13 @@
             });
         }
 
+
         function displayGameOverScreen(character) {
             var context = {
                 "playerName": character.playerName
             };
             $('.app').html(gameOverScreenTemplate(context));
+
 
         }
 

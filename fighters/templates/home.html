@@ -27,6 +27,7 @@
         <select class="row margin-auto" id="hero_menu">
             <option></option>
         </select>
+            <img id="paint" src="../static/fighters/media/fight.gif" alt="">
         </div>
 
     </div>
@@ -40,10 +41,11 @@
 
         <div class="row">
             <div id="hero-name">
-            <p id="yourName"></p>
             </div>
             <div class="col" id="yourHealth"><div id="yourHealthBar"></div></div>
+            <p id="yourName"></p>
             <div class="col" id="compHealth"><div id="compHealthBar"></div></div>
+            <p id="theirName"></p>
         </div>
         <div class="row">
             <div class="col-md-2 buttons">
@@ -55,7 +57,7 @@
                 <div class="wrapper">
 {#                    I know this image isn't setup right, but it's going to be similar once we pass in the var name to the curly brackets#}
 {#                    they may go inside the apostrophes though.#}
-                    <div class="head"><!--<img class="character-picture" src="{% static 'fighters/media/' {{  }} %}.png" alt="">--></div>
+                    <div class="head" id="hero_avatar"><!--<img class="character-picture" src="{% static 'fighters/media/' {{  }} %}.png" alt="">--></div>
                     <div class="torso"></div>
                     <div class="leftarm"></div>
                     <div class="rightarm"></div>
@@ -67,7 +69,7 @@
             </div>
             <div class="villain">
                 <div class="wrapper">
-                    <div class="head"></div>
+                    <div class="head" id="villain_avatar"></div>
                     <div class="torso"></div>
                     <div class="leftarm"></div>
                     <div class="rightarm"></div>
@@ -86,6 +88,7 @@
     <div class="game over">
         <div><img src="../static/fighters/media/game_over.gif" alt="" width="1275" height="620"></div>
     </div>
+    <a href="/">Insert Coins to Play Again</a>
 </script>
 <script type="text/javascript" src="../static/fighters/js/models.js"></script>
 <script type="text/javascript" src="../static/fighters/js/main.js"></script>
