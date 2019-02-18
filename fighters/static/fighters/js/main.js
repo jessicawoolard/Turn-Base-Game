@@ -36,6 +36,7 @@
 
 
 
+
         function displayWelcomeScreen() {
             $('.app').html(welcomeScreenTemplate());
             // Register event handler for the next button
@@ -67,11 +68,13 @@
 
             $('#next-button').on('click', function (e) {
                 e.preventDefault();
+                setTimeout(function () {
                 updateSelectedHero();
                 updateSelectedVillain();
                 displayNextScreen();
                 updateHeroAvatar();
                 updateVillainAvatar();
+                },2500);
             });
         }
 
@@ -84,14 +87,21 @@
         function displayNextScreen() {
 
             $('.app').html(nextScreenTemplate());
-
-            $('yourName').append(activeHero.playerName);
-
-            $('#back-button').on('click', function (e) {
-                e.preventDefault();
-                displayGameOverScreen();
+            $('#disappear').ready(function () {
+                setTimeout(function () {
+                    $('#saint').show(6000, function () {
+                        setTimeout(function () {
+                            $('#saint').hide(500);
+                        })
+                    });
+                });
             });
-            console.log(activeVillain)
+
+
+            $('#yourName').append(activeHero.playerName);
+            $('#theirName').append(activeVillain.playerName);
+
+            console.log(activeVillain);
 
             function heroAttack() {
                 var heroHit = 0;
@@ -104,21 +114,15 @@
                 }
 
 
-                villianHealth -= heroHit;
+                villainHealth -= heroHit;
 
                 $("#compHealthBar").animate({
-                    width: villianHealth + "%",
+                    width: villainHealth + "%",
                 }, 1000, function () {
-                     if (villianHealth <= 0){
+                     if (villainHealth <= 0){
                     displayGameOverScreen(activeHero);
                 }
                 });
-
-                villainHealth -= heroHit;
-                $("#compHealthBar").animate({
-                    width: villainHealth + "%",
-                }, 1000);
-
             }
 
             function villainAttack() {
@@ -147,8 +151,10 @@
                 heroAttack();
 
                 setTimeout(function () {
+                    let soundEffect = new Audio('../../../static/fighters/media/punch.mp3')
+                    soundEffect.play();
                     villainAttack();
-                },2500);
+                },1500);
 
                 let soundEffect = new Audio('../../../static/fighters/media/punch.mp3');
                 soundEffect.play();
@@ -161,7 +167,11 @@
                 "playerName": character.playerName
             };
             $('.app').html(gameOverScreenTemplate(context));
-
+            $('#wait').ready(function () {
+                setTimeout(function(){
+                    $('#paint').show(8000); // 10 seconds
+                });
+            });
 
         }
 
@@ -170,17 +180,17 @@
 
         // Characters
         var fiona = new Hero({
-            playerName: "Fiona",
+            playerName: "Fiona Gallagher",
             image: 'fiona.png',
             specialPower: 'snatch and grab'
         });
         var frank = new Villain({
-            playerName: "Frank",
+            playerName: "Frank Gallagher",
             image: 'frank.png',
             villainPower: 'drunk joke here'
         });
         var michael = new Hero({
-            playerName: "Michael",
+            playerName: "Michael Scott",
             image: 'michael.png',
             specialPower: 'lonely punch'
         });
@@ -190,12 +200,12 @@
             villainPower: 'drunk joke here'
         });
         var will = new Hero({
-            playerName: "Will",
+            playerName: "Will Smith",
             image: 'will.png',
             specialPower: 'snatch and grab'
         });
         var carlton = new Villain({
-            playerName: "Carlton",
+            playerName: "Carlton Banks",
             image: 'carlton.png',
             villainPower: 'drunk joke here'
         });
@@ -210,12 +220,12 @@
             villainPower: 'drunk joke here'
         });
         var eric = new Hero({
-            playerName: "Eric",
+            playerName: "Eric Forman",
             image: 'eric.png',
             specialPower: 'snatch and grab'
         });
         var red = new Villain({
-            playerName: "Red",
+            playerName: "Red Forman",
             image: 'red.png',
             villainPower: 'drunk joke here'
         });

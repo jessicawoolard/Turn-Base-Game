@@ -17,35 +17,46 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.js"></script>
 
 <script id="welcome-screen" type="text/x-handlebars-template">
-    <audio src="../static/fighters/media/mainsong.mp3" autoplay></audio>
-    <div class="logo">
-    <img class="logo-width" src="../static/fighters/media/sitcom-logo.png" alt="sitcom logo">
-    </div>
-    <div class="container-fluid">
-        <div class="margin-auto">
-        <a id="next-button" class="btn btn-primary" href="#">Fight!</a>
-        <select class="row margin-auto" id="hero_menu">
-            <option></option>
-        </select>
-            <img id="paint" src="../static/fighters/media/fight.gif" alt="">
+    <div id="main-page">
+        <audio id="pause" src="../static/fighters/media/theoffice.mp3" autoplay></audio>
+        <audio id="startFight">
+            <source src="../static/fighters/media/gamestart.mp3">
+        </audio>
+        <div class="logo">
+        <img class="logo-width" src="../static/fighters/media/sitcom-logo.png" alt="sitcom logo">
         </div>
+        <div class="container-fluid">
+            <div class="margin-auto">
+                <audio id="gameStart"></audio>
+            <a onclick="document.getElementById('startFight').play(); document.getElementById('pause').pause()" id="next-button" class="btn btn-primary" href="#">Fight!</a>
+            <div class="padding">
+            <select class="row margin-auto padding" id="hero_menu">
+                <option></option>
+            </select>
+            </div>
+            </div>
 
+        </div>
     </div>
-
 </script>
 
 <script id="next-screen" type="text/x-handlebars-template">
-    <audio src="../static/fighters/media/main.mp3" autoplay></audio>
-{#    <audio src="../static/fighters/media/punch.mp3" preload="auto"></audio>#}
+
+    <audio src="../static/fighters/media/mortalkombat.mp3" autoplay></audio>
     <div class="container ring">
 
         <div class="row">
             <div id="hero-name">
             </div>
             <div class="col" id="yourHealth"><div id="yourHealthBar"></div></div>
-            <p id="yourName"></p>
             <div class="col" id="compHealth"><div id="compHealthBar"></div></div>
-            <p id="theirName"></p>
+        </div>
+        <div id="disappear">
+        <img id="saint" src="../static/fighters/media/fight.gif" alt="Fight!">
+        </div>
+        <div class="row">
+            <p class="col-md-6 text-white font-weight-bold" id="yourName"></p>
+            <p class="col-md-6 text-right text-white font-weight-bold" id="theirName"></p>
         </div>
         <div class="row">
             <div class="col-md-2 buttons">
@@ -55,9 +66,7 @@
         <div>
             <div class="hero">
                 <div class="wrapper">
-{#                    I know this image isn't setup right, but it's going to be similar once we pass in the var name to the curly brackets#}
-{#                    they may go inside the apostrophes though.#}
-                    <div class="head" id="hero_avatar"><!--<img class="character-picture" src="{% static 'fighters/media/' {{  }} %}.png" alt="">--></div>
+                    <div class="head" id="hero_avatar"></div>
                     <div class="torso"></div>
                     <div class="leftarm"></div>
                     <div class="rightarm"></div>
@@ -80,15 +89,17 @@
                 </div>
             </div>
         </div>
-        <a id="back-button" class="btn btn-primary" href="#">Back a Screen</a>
     </div>
 </script>
 
 <script id="gameover-screen" type="text/x-handlebars-template">
-    <div class="game over">
-        <div><img src="../static/fighters/media/game_over.gif" alt="" width="1275" height="620"></div>
+        <audio src="../static/fighters/media/gameover.mp3" autoplay></audio>
+        <div class="container-fluid">
+            <img class="gameover" src="../static/fighters/media/game_over.gif" alt="game over">
+        </div>
+    <div id="wait">
+    <a href="/"><img id="paint" src="../static/fighters/media/insertcoin.gif" alt="restart"></a>
     </div>
-    <a href="/">Insert Coins to Play Again</a>
 </script>
 <script type="text/javascript" src="../static/fighters/js/models.js"></script>
 <script type="text/javascript" src="../static/fighters/js/main.js"></script>
