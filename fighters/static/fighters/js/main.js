@@ -101,9 +101,14 @@
                 }
 
                 villianHealth -= heroHit;
+
                 $("#compHealthBar").animate({
                     width: villianHealth + "%",
-                }, 1000);
+                }, 1000, function () {
+                     if (villianHealth <= 0){
+                    displayGameOverScreen(activeHero);
+                }
+                });
             }
 
             function villianAttack() {
@@ -116,9 +121,14 @@
                 }
 
                 heroHealth -= villianHit;
+
                 $("#yourHealthBar").animate({
                     width: heroHealth + "%",
-                }, 1000);
+                }, 1000, function () {
+                    if (heroHealth <= 0) {
+                    displayGameOverScreen(activeVillain);
+                }
+                });
             }
 
             $('#attack-button').click(function () {
@@ -129,18 +139,16 @@
                     villianAttack();
                 },2500);
 
-                let soundEffect = new Audio('./media/punch.mp3');
+                let soundEffect = new Audio('../../../static/fighters/media/punch.mp3');
                 soundEffect.play();
             });
         }
 
-        function ran() {
-
-        }
-
-        function displayGameOverScreen() {
-            var context = {};
-            $('.app').html(gameOverScreenTemplate());
+        function displayGameOverScreen(character) {
+            var context = {
+                "playerName": character.playerName
+            };
+            $('.app').html(gameOverScreenTemplate(context));
 
         }
 
