@@ -19,114 +19,130 @@
 
         // Navigation
 
-        $('.button').on('click', function (e) {
-            console.log('works')
-        });
+        // $('.button').on('click', function (e) {
+        //     console.log('works')
+        // });
         var nextScreen = document.getElementById("next-screen").innerHTML;
         var nextScreenTemplate = Handlebars.compile(nextScreen);
 
         var welcomeScreen = document.getElementById("welcome-screen").innerHTML;
         var welcomeScreenTemplate = Handlebars.compile(welcomeScreen);
 
-        var activeFighter;
+        var activeHero;
+        var activeVillain;
+
+        var heroHealth = 100;
+        var villianHealth = 100;
 
         var gameOverScreen = document.getElementById("gameover-screen").innerHTML;
         var gameOverScreenTemplate = Handlebars.compile(gameOverScreen);
-
 
         function displayWelcomeScreen() {
             $('.app').html(welcomeScreenTemplate());
 
             // Register event handler for the next button
-
-
-            $('#next-button').on('click', function (e) {
-                e.preventDefault();
-                var selectedHero = $('#hero_menu option:selected').val();
-                var i;
-                for (i = 0; i < heroes.length; i++) {
-                    var currentHero = heroes[i];
+            function updateSelectedHero(){
+                let selectedHero = $('#hero_menu option:selected').val();
+                for (var i = 0; i < heroes.length; i++) {
+                    let currentHero = heroes[i];
                     if (currentHero.playerName === selectedHero) {
-                        console.log("match!");
-                        activeFighter = currentHero;
+                        activeHero = currentHero;
                         break
                     }
                 }
-                console.log(activeFighter);
+            }
 
+            function  updateHeroAvatar() {
+                $('#hero_avatar').css({
+                    'background': "url('../../../static/fighters/media/" + activeHero.image + "')"
+                });
+            }
+
+            function  updateVillainAvatar() {
+                $('#villian_avatar').css({
+                    'background': "url('../../../static/fighters/media/" + activeVillain.image + "')"
+                });
+            }
+            function updateSelectedVillain() {
+                var randomVillain = villains[Math.floor(Math.random() * villains.length)];
+                activeVillain = randomVillain
+            }
+
+            $('#next-button').on('click', function (e) {
+                e.preventDefault();
+                updateSelectedHero();
+                updateSelectedVillain();
                 displayNextScreen();
+                updateHeroAvatar();
+                updateVillainAvatar();
             });
+
+        }
+
+        function randomAttack(min, max) {
+            min = Math.floor(min);
+            max = Math.ceil(max);
+            return Math.floor(Math.random() * (max - min)) + min;
         }
 
         function displayNextScreen() {
-            var context = {
 
-            };
-
-            $('.app').html(nextScreenTemplate(context));
+            $('.app').html(nextScreenTemplate());
 
             $('#back-button').on('click', function (e) {
                 e.preventDefault();
                 displayGameOverScreen();
             });
-            $('#attack-button').click(function () {
-                var hitOutcome = [];
-                (function swiftHit(min, max) {
-                    min = Math.ceil(min);
-                    max = Math.floor(max);
-                    var result = Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-                    hitOutcome.push(result)
-                }(15, 20));
-                var strongHitOutcome = [];
-                (function strongHit(min, max) {
-                    min = Math.ceil(min);
-                    max = Math.floor(max);
-                    var result2 = Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-                    strongHitOutcome.push(result2)
-                }(25, 40));
-                var totalHit = '';
-                var hit = Math.random();
-                if(hit<0.8){
-                    totalHit += hitOutcome.toString()
-                }else{
-                    totalHit += strongHitOutcome.toString()
+
+            function heroAttack() {
+                var heroHit = 0;
+                if (Math.random() < 0.8) {
+                    // Swift Hit
+                    heroHit = randomAttack(15, 20);
+                } else {
+                    // Strong hit
+                    heroHit = randomAttack(25, 40);
                 }
-                console.log(totalHit);
-                        var villainHitOutcome = [];
-                        (function swiftHit(min, max) {
-                            min = Math.ceil(min);
-                            max = Math.floor(max);
-                            var result3 = Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-                            villainHitOutcome.push(result3)
-                        }(15, 20));
 
-                        var villainStrongHitOutcome = [];
-                        (function strongHit(min, max) {
-                            min = Math.ceil(min);
-                            max = Math.floor(max);
-                            var result4 = Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-                            villainStrongHitOutcome.push(result4)
-                        }(25, 40));
-                        var totalVillainHit = '';
-                        var villainHit = Math.random();
-                        if (villainHit < 0.8) {
-                            totalVillainHit += villainHitOutcome.toString()
-                        } else {
-                            totalVillainHit += villainStrongHitOutcome.toString()
-                        }
-                        //i'm not doing something right with the setTimeout function to create the delay
-                        //between hits. kind of a bummer. i'm going to leave it alone for now, since it's purely aesthetics.
-                        setTimeout(function () {
-                            console.log(totalVillainHit);
-                        }(2500));
+                villianHealth -= heroHit;
+                $("#compHealthBar").animate({
+                    width: villianHealth + "%",
+                }, 1000);
+            }
 
-                // var snd = new Audio('punch.mp3');
-                // snd.play();
-                // snd.currentTime=0;
+            function villianAttack() {
+
+                var villianHit = 0;
+                if (Math.random() < 0.8) {
+                    villianHit = randomAttack(15, 20);
+                } else {
+                    villianHit = randomAttack(25, 40);
+                }
+
+                heroHealth -= villianHit;
+                $("#yourHealthBar").animate({
+                    width: heroHealth + "%",
+                }, 1000);
+            }
+
+            $('#attack-button').click(function () {
+
+                heroAttack();
+
+                setTimeout(function () {
+                    villianAttack();
+                },2500);
+
+                let soundEffect = new Audio('./media/punch.mp3');
+                soundEffect.play();
             });
         }
 
-        function displayGameOverScreen(){
+        function ran() {
+
+        }
+
+        function displayGameOverScreen() {
             var context = {};
             $('.app').html(gameOverScreenTemplate());
 
@@ -138,62 +154,52 @@
         // Characters
         var fiona = new Hero({
             playerName: "Fiona",
-            attack1: 'flavor text',
-            attack2: 'flavor text',
+            image: 'fiona.png',
             specialPower: 'snatch and grab'
         });
         var frank = new Villain({
             playerName: "Frank",
-            attack1: 'flavor text',
-            attack2: 'flavor text',
+            image: 'frank.png',
             villainPower: 'drunk joke here'
         });
         var michael = new Hero({
             playerName: "Michael",
-            attack1: 'flavor text',
-            attack2: 'flavor text',
+            image: 'michael.png',
             specialPower: 'lonely punch'
         });
         var prisonMike = new Villain({
             playerName: "Prison Mike",
-            attack1: 'flavor text',
-            attack2: 'flavor text',
+            image: 'prisonmichael.png',
             villainPower: 'drunk joke here'
         });
         var will = new Hero({
             playerName: "Will",
-            attack1: 'flavor text',
-            attack2: 'flavor text',
+            image: 'will.png',
             specialPower: 'snatch and grab'
         });
         var carlton = new Villain({
             playerName: "Carlton",
-            attack1: 'flavor text',
-            attack2: 'flavor text',
+            image: 'carlton.png',
             villainPower: 'drunk joke here'
         });
         var zack = new Hero({
             playerName: "Zack Morris",
-            attack1:'flavor text',
-            attack2: 'flavor text',
+            image: 'zack.png',
             specialPower: 'snatch and grab'
         });
         var belding = new Villain({
             playerName: "Mr. Belding",
-            attack1: 'flavor text',
-            attack2: 'flavor text',
+            image: 'belding.png',
             villainPower: 'drunk joke here'
         });
         var eric = new Hero({
             playerName: "Eric",
-            attack1: 'flavor text',
-            attack2: 'flavor text',
+            image: 'eric.png',
             specialPower: 'snatch and grab'
         });
         var red = new Villain({
             playerName: "Red",
-            attack1: 'flavor text',
-            attack2: 'flavor text',
+            image: 'red.png',
             villainPower: 'drunk joke here'
         });
 
@@ -214,20 +220,6 @@
 
 
         //Attacking
-
-        $('#attack-button').on('click', function () {
-            activeFighter.powerfulAttack();
-        });
-
-        $('#attack-button2').on('click', function () {
-            console.log(activeFighter.attack2);
-        });
-
-
-        $("#rand").on('click', function () {
-            console.log(rand)
-        });
-        var rand = villains[Math.floor(Math.random() * villains.length)];
 
 
     });
