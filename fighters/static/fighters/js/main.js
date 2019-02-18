@@ -64,10 +64,13 @@
             };
 
             $('.app').html(nextScreenTemplate(context));
+            // var playername =document.createElement()
+
+            $('#yourName').append(rand.playerName);
 
             $('#back-button').on('click', function (e) {
                 e.preventDefault();
-                displayGameOverScreen();
+                displayWelcomeScreen();
             });
             $('#attack-button').click(function () {
                 var hitOutcome = [];
@@ -119,7 +122,7 @@
                         setTimeout(function () {
                             console.log(totalVillainHit);
                         }(2500));
-
+                //
                 // var snd = new Audio('punch.mp3');
                 // snd.play();
                 // snd.currentTime=0;
