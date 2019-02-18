@@ -17,9 +17,9 @@ h1 {
 }
 
 .ring{
-    background-image: url("../media/ring2.jpg");
+    background: url("../media/ring2.jpg") bottom;
     background-size: cover;
-    background-repeat: no-repeat;
+    /*background-repeat: no-repeat;*/
 }
 
 .button {
@@ -40,7 +40,7 @@ h1 {
 }
 
 #main-page {
-  background: url("../media/killyou.gif") no-repeat bottom fixed;
+  background: url("../media/killyou.gif") bottom;
   background-size: cover;
 }
 
