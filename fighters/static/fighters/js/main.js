@@ -170,15 +170,18 @@
             // this is going and finding the disappear id (tied to parent of fight.gif), and saying bring in saint,
             // the id that's tied to the actual gif, after 6 seconds with the show method, and then another timeout
             //that will hide it after half a second.
-            $('#disappear').ready(function () {
-                setTimeout(function () {
-                    $('#saint').show(6000, function () {
-                        setTimeout(function () {
-                            $('#saint').hide(500);
-                        })
+            $(document).ready(setTimeout(runGif, 5500));
+
+            $('#attack-button').css('visibility', 'hidden');
+
+            function runGif(){
+                $('#saint').show(function(){
+                    $('#attack-button').css('visibility', 'visible');
+                    setTimeout(function () {
+                        $('#saint').hide(1000);
                     });
                 });
-            });
+            }
 
             // this is what gets the player name's to show under the health bars
             $('#yourName').append(activeHero.playerName);
@@ -230,13 +233,17 @@
             }
 
             $('#attack-button').click(function () {
-
                 heroAttack();
+
+                $('#attack-button').css('visibility', 'hidden');
 
                 setTimeout(function () {
                     let soundEffect = new Audio('../../../static/fighters/media/punch.mp3')
                     soundEffect.play();
                     villainAttack();
+                    setTimeout(function () {
+                        $('#attack-button').css('visibility', 'visible');
+                    }, 500);
                 },1500);
 
                 let soundEffect = new Audio('../../../static/fighters/media/punch.mp3');

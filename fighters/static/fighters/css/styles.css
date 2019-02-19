@@ -96,9 +96,22 @@ h1 {
     margin-left: 6%;
 }
 
+.col-md-2, .col-md-5{
+  padding: 0;
+  margin: 0;
+}
+
 .villain {
     display: inline-block;
     margin-left: 23%;
+}
+
+#compHealth {
+  float: right;
+}
+
+.whoknows{
+  display: none;
 }
 
 .lead {
@@ -140,6 +153,7 @@ h1 {
     transform: rotate(10deg);
   }
 }
+
 
 .torso {
   width: 6px;
