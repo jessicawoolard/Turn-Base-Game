@@ -19,6 +19,7 @@ h1 {
 .ring{
     background: url("../media/ring2.jpg") bottom;
     background-size: cover;
+    min-width: 955px;
     /*background-repeat: no-repeat;*/
 }
 
@@ -48,7 +49,7 @@ h1 {
     position:absolute;
     top: 25%;
     left:33%;
-    width:25%;
+    width:50%;
     display: none;
     z-index: 10000;
 }

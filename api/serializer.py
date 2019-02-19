@@ -1,10 +1,10 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 
 from fighters.models import Game
 
 
-class GameSerializer(ModelSerializer):
+class GameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Game
-        fields = ('heroHealth', 'villainHealth')
-        depth = 1
+        fields = ('pk', 'heroHealth', 'villainHealth')
+        # depth = 1

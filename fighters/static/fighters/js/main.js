@@ -39,11 +39,63 @@
         var activeHero;
         var activeVillain;
 
+        var gamePrimaryKey;
+
+        let searchParams = new URLSearchParams(window.location.search);
+        if (searchParams.has('gameID')) {
+            gamePrimaryKey = searchParams.get('gameID');
+        }
+
         //This is just setting their starting health to 100 each.
         var heroHealth = 100;
         var villainHealth = 100;
 
+        function createGame() {
+            $.ajax('/api/game/', {
+                'method': 'POST',
+                'data': {
+                    "heroHealth": 100,
+                    "villainHealth": 100
+                },
+                'success': function (data) {
+                    console.log("Game Created!");
+                    gamePrimaryKey = data["pk"];
+                    document.cookie = gamePrimaryKey + "&" + activeHero.playerName + "&" + activeVillain.playerName;
+                },
+                'error': function (xhr) {
+                    console.log(xhr.statusText);
+                }
+            });
+        }
 
+        function updateGame() {
+            $.ajax('/api/game/' + gamePrimaryKey, {
+                'method': 'PUT',
+                'data': {
+                    "heroHealth": heroHealth,
+                    "villainHealth": villainHealth
+                },
+                'success': function (data) {
+                    console.log("Game Updated!");
+                },
+                'error': function (xhr) {
+                    console.log(xhr.statusText);
+                }
+            });
+        }
+
+        function getGameByID(pk) {
+            $.ajax('/api/game/' + pk, {
+                'method': 'GET',
+                'success': function (data) {
+                    console.log("Got Game!");
+                    console.log(data);
+                },
+                'error': function (xhr) {
+                    console.log(xhr.statusText);
+                }
+            });
+        }
 
         // This function is what it means to display the welcome screen, or the home screen
         function displayWelcomeScreen() {
@@ -90,11 +142,14 @@
             // this time it's 2500 milliseconds, or 2.5 seconds
             $('#next-button').on('click', function (e) {
                 e.preventDefault();
+
+
                 // so it will take 2 1/2 seconds for the displayNextScreen to happen, and for the updated stuff to
                 // carry over to that template.
                 setTimeout(function () {
                 updateSelectedHero();
                 updateSelectedVillain();
+                createGame();
                 displayNextScreen();
                 updateHeroAvatar();
                 updateVillainAvatar();
@@ -141,8 +196,8 @@
                     heroHit = randomAttack(25, 40);
                 }
 
-
                 villainHealth -= heroHit;
+                updateGame();
 
                 $("#compHealthBar").animate({
                     width: villainHealth + "%",
@@ -162,8 +217,8 @@
                     villainHit = randomAttack(25, 40);
                 }
 
-
                 heroHealth -= villainHit;
+                updateGame();
 
                 $("#yourHealthBar").animate({
                     width: heroHealth + "%",
@@ -189,7 +244,6 @@
             });
         }
 
-
         function displayGameOverScreen(character) {
             var context = {
                 "playerName": character.playerName
@@ -203,8 +257,14 @@
 
         }
 
-        // Run the program for the first time!
-        displayWelcomeScreen();
+        // Run the program for the first time!f
+        if (document.cookie != null) {
+            console.log(document.cookie);
+            displayWelcomeScreen();
+        } else {
+            displayWelcomeScreen();
+        }
+
 
         // Characters
         var fiona = new Hero({
