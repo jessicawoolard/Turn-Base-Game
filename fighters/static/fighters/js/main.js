@@ -206,7 +206,8 @@
                     width: villainHealth + "%",
                 }, 1000, function () {
                      if (villainHealth <= 0){
-                    displayGameOverScreen(activeHero);
+                         $('#attack-button').addClass(disabled);
+                        displayGameOverScreen(activeHero);
                 }
                 });
             }
