@@ -206,8 +206,7 @@
                     width: villainHealth + "%",
                 }, 1000, function () {
                      if (villainHealth <= 0){
-                         $('#attack-button').addClass(disabled);
-                        displayGameOverScreen(activeHero);
+                         displayGameOverScreen(activeHero);
                 }
                 });
             }
@@ -239,16 +238,18 @@
                 $('#attack-button').css('visibility', 'hidden');
 
                 setTimeout(function () {
-                    let soundEffect = new Audio('../../../static/fighters/media/punch.mp3')
-                    soundEffect.play();
                     villainAttack();
+                    let retaliate = new Audio('../../../static/fighters/media/punch.mp3');
+                    if (villainHealth > 0){
+                        retaliate.play();
+                    }
                     setTimeout(function () {
                         $('#attack-button').css('visibility', 'visible');
                     }, 500);
                 },1500);
-
                 let soundEffect = new Audio('../../../static/fighters/media/punch.mp3');
                 soundEffect.play();
+
             });
         }
 
