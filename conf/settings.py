@@ -47,9 +47,9 @@ SECRET_KEY = 'lr$i9$hrc4fn3481qbkc+lh8su(t=w3ofioohmp9q173vgk615'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '132.145.209.240'
     '127.0.0.1',
     'jessica.turnbasedgame.com'
+    '132.145.209.240'
 ]
 
 
@@ -160,4 +160,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
