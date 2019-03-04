@@ -13,5 +13,4 @@ markdown = "*"
 uwsgi = "*"
 dj-database-url = "*"
 
-[requires]
-python_version = "3.7"
+
