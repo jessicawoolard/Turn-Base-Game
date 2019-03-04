@@ -1,0 +1,254 @@
+* {
+    box-sizing: border-box;
+}
+
+.text-white {
+  padding-right: 3%;
+}
+
+a {
+  margin: 3%;
+}
+
+h1 {
+  display: inline-block;
+  width: 33%;
+  text-align: center;
+}
+
+.ring{
+    background: url("../media/ring2.jpg") bottom;
+    background-size: cover;
+    min-width: 955px;
+    /*background-repeat: no-repeat;*/
+}
+
+.button {
+    margin-top: 1%;
+}
+
+.buttons {
+    margin-top: 2%;
+}
+
+#paint {
+    position:absolute;
+    top: 25%;
+    left:49%;
+    height:100px;
+    width:100px;
+    display: none;
+}
+
+#main-page {
+  background: url("../media/killyou.gif") bottom;
+  background-size: cover;
+}
+
+#saint {
+    position:absolute;
+    top: 25%;
+    left:33%;
+    width:50%;
+    display: none;
+    z-index: 10000;
+}
+
+.padding {
+  padding-bottom: 30%;
+}
+
+#yourHealth, #compHealth {
+	position: relative;
+	height: 30px;
+	width: 250px;
+	border: white 3px solid;
+	border-radius: 3px;
+	margin-right: 20px;
+	display: inline-block;
+}
+
+#yourHealthBar, #compHealthBar {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: lightgreen;
+}
+
+.wrapper {
+  width: 300px;
+  height: 300px;
+  display: block;
+  position: relative;
+}
+
+.margin-auto {
+  margin: auto;
+  text-align: center;
+  align-items: center;
+}
+
+.hero {
+    margin-top: 10%;
+    display: inline-block;
+    margin-left: 6%;
+}
+
+.col-md-2, .col-md-5{
+  padding: 0;
+  margin: 0;
+}
+
+.villain {
+    display: inline-block;
+    margin-left: 23%;
+}
+
+#compHealth {
+  float: right;
+}
+
+.whoknows{
+  display: none;
+}
+
+.lead {
+  margin-top: 10%;
+}
+
+.logo {
+  text-align: center;
+}
+
+.gameover {
+  width: 100%;
+}
+
+.logo-width {
+  width: 50%;
+  opacity: .8;
+}
+
+.head {
+  width: 144px;
+  height: 153px;
+  border: 5px solid #ffffff;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  top: -71px;
+  left: 85px;
+  z-index: 1;
+  animation: rock 1s alternate infinite ease-in-out;
+  transform-origin: center bottom;
+}
+
+@keyframes rock {
+  0% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(10deg);
+  }
+}
+
+
+.torso {
+  width: 6px;
+  height: 100px;
+  border: 3px solid #ffffff;
+  display: block;
+  position: absolute;
+  top: 80px;
+  left: 156px;
+}
+
+.leftleg {
+  width: 6px;
+  height: 100px;
+  border: 3px solid #ffffff;
+  display: block;
+  position: absolute;
+  top: 175px;
+  left: 155px;
+  transform: rotate(12deg);
+  transform-origin: top;
+}
+
+.rightleg {
+  width: 6px;
+  height: 100px;
+  border: 3px solid #ffffff;
+  display: block;
+  position: absolute;
+  top: 175px;
+  left: 157px;
+  transform: rotate(-12deg);
+  transform-origin: top;
+}
+
+.leftarm {
+  width: 100px;
+  height: 6px;
+  border: 3px solid #ffffff;
+  display: block;
+  position: absolute;
+  top: 86px;
+  left: 57px;
+  animation: wave 1s alternate infinite ease-in-out;
+  transform-origin: 100%;
+}
+
+@keyframes wave {
+  0% {
+    transform: rotate(-20deg);
+  }
+  100% {
+    transform: rotate(40deg);
+  }
+}
+
+.rightarm {
+  width: 100px;
+  height: 6px;
+  border: 3px solid #ffffff;
+  display: block;
+  position: absolute;
+  top: 86px;
+  left: 161px;
+  animation: wave2 1s alternate infinite ease-in-out;
+  transform-origin: 0%;
+}
+
+@keyframes wave2 {
+  0% {
+    transform: rotate(20deg);
+  }
+  100% {
+    transform: rotate(-40deg);
+  }
+}
+
+.leftfoot {
+  width: 30px;
+  height: 6px;
+  border: 3px solid #ffffff;
+  display: block;
+  position: absolute;
+  top: 270px;
+  left: 110px;
+  transform: rotate(8deg);
+}
+
+.rightfoot {
+  width: 30px;
+  height: 6px;
+  border: 3px solid #ffffff;
+  display: block;
+  position: absolute;
+  top: 270px;
+  left: 178px;
+  transform: rotate(-8deg);
+}
