@@ -10,6 +10,7 @@ django = "*"
 psycopg2 = "*"
 djangorestframework = "*"
 markdown = "*"
+uwsgi = "*"
 
 [requires]
 python_version = "3.7"
