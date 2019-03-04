@@ -27,7 +27,9 @@ SECRET_KEY = 'lr$i9$hrc4fn3481qbkc+lh8su(t=w3ofioohmp9q173vgk615'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'jessica.turnbasedgame.com'
+]
 
 
 # Application definition
